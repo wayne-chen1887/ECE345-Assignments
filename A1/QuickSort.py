@@ -8,6 +8,7 @@ import csv
 import time
 import math
 import matplotlib.pyplot as plt
+import random
 
 sys.setrecursionlimit(10**9)
 
@@ -25,14 +26,14 @@ with open(InputFile + '.csv', 'r') as csvfile:
 Arr = list(Data)
 
 
-def DetermineInputSizeList(Arr, buckets):
+def DetermineInputSizeList(Arr):
+    j = 1
+    i = 2
     InputSize = []
-    i = int(len(Arr)/buckets)
-    for idx, value in enumerate(Arr):
-        if idx % i == 0 and idx != 0:
-            InputSize.append(idx)
-        if idx == len(Arr) - 1:
-            InputSize.append(idx)
+    while i < len(Arr):
+        InputSize.append(i)
+        i = 2**(j)
+        j += 1
     return InputSize
 
 
@@ -69,9 +70,9 @@ def TimeAlgorithm(Arr, InputSize, p, r):
 
 def Graph(InputSize, ExecTime):
     plt.plot(InputSize, ExecTime)
-    plt.ylabel('Execution Time (s)')
-    plt.xlabel('Input Size (n)')
-    plt.title('Algorithm RunTime as a Function of Input Size')
+    plt.ylabel('Runtime (s)')
+    plt.xlabel('Input Size (logn)')
+    plt.title('Algorithm RunTime of QUICK SORT as a Function of Input Size')
     plt.show()
 
 
@@ -80,14 +81,22 @@ r = len(Arr) - 1
 
 if Submission:  # Submission flag
     print(f'Running QuickSort on Input Size of {len(Arr)}')
-    InputSize = DetermineInputSizeList(Arr, 5)
-    ExecTime = TimeAlgorithm(Arr, InputSize, p, r)
-    Graph(InputSize, ExecTime)
-else:
+    StartTime = time.time()
+
     QuickSort(Arr, p, r)
+
+    Total = time.time() - StartTime
+    # Print the sorted array
     for i in Arr:
         Data[i].insert(0, i)
         print(Data[i])
+    # Print the status of the dataset
     SortStatus = all(Arr[i] <= Arr[i+1]
                      for i in range(len(Arr)-1))  # Check if Sorted
     print(f'Is the Dataset Sorted: {SortStatus}')
+    print(Total)
+else:
+    print(f'Running QuickSort on Input Size of {len(Arr)}')
+    InputSize = DetermineInputSizeList(Arr)
+    ExecTime = TimeAlgorithm(Arr, InputSize, p, r)
+    Graph(InputSize, ExecTime)

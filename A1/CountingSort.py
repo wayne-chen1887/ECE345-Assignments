@@ -1,4 +1,4 @@
-# !/usr/bin/env python3
+#!/usr/bin/env python3
 
 # Counting Sort
 # Worst Case - Theta(k + n)
@@ -8,34 +8,34 @@ import csv
 import time
 import math
 import matplotlib.pyplot as plt
-
+import random
 
 sys.setrecursionlimit(10**9)
-sysarg = False
 
-if sysarg:
-    InputFile = sys.argv[0]
-else:
-    InputFile = 'a1.large'
+Submission = True
+InputFile = sys.argv[1]
 
-
-Data = []
+# Storing Data as nested list, where key is element 0 of nested list
+Data = dict()
 with open(InputFile + '.csv', 'r') as csvfile:
     csv_reader = csv.reader(csvfile)
     for row in csv_reader:
-        Data.append(int(row[0]))
+        Data[int(row[0])] = list()
+        for i in row[1:]:
+            Data[int(row[0])].append(i)
+Arr = list(Data)
 
-max_value = max(Data)
+max_value = max(Arr)
 
 
-def DetermineInputSizeList(Data, buckets):
+def DetermineInputSizeList(Data):
+    j = 1
+    i = 2
     InputSize = []
-    i = int(len(Data)/buckets)
-    for idx, value in enumerate(Data):
-        if idx % i == 0 and idx != 0:
-            InputSize.append(idx)
-        if idx == len(Data) - 1:
-            InputSize.append(idx)
+    while i < len(Arr):
+        InputSize.append(i)
+        i = 2**(j)
+        j += 1
     return InputSize
 
 
@@ -73,6 +73,21 @@ def Graph(InputSize, ExecTime):
     plt.show()
 
 
-InputSize = DetermineInputSizeList(Data, 10)
-ExecTime = TimeAlgorithm(Data, InputSize, max_value)
-Graph(InputSize, ExecTime)
+if Submission:  # Submission flag
+    print(
+        f'Running Counting Sort on Input Size of {len(Arr)}. Please be patient for large n inputs.')
+    CountingSort(Arr, max_value)
+    # Print the sorted array
+    for i in Arr:
+        Data[i].insert(0, i)
+        print(Data[i])
+    # Print the status of the dataset
+    SortStatus = all(Arr[i] <= Arr[i+1]
+                     for i in range(len(Arr)-1))  # Check if Sorted
+    print(f'Is the Dataset Sorted: {SortStatus}')
+else:
+    print(f'Running Counting Sort on Input Size of {len(Arr)}')
+    InputSize = DetermineInputSizeList(Arr)
+    print(InputSize)
+    ExecTime = TimeAlgorithm(Arr, InputSize, max_value)
+    Graph(InputSize, ExecTime)

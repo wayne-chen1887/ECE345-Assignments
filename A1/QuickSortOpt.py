@@ -1,8 +1,8 @@
-#!/usr/bin/env python3
+# !/usr/bin/env python3
 
-# HEAPSORT
-# Worst Case - O(nlogn)
-# Average Case - n/a
+# QUICKSORT
+# Worst Case - Theta(n^2)
+# Average Case - Theta(nlogn)
 import sys
 import csv
 import time
@@ -37,38 +37,36 @@ def DetermineInputSizeList(Arr):
     return InputSize
 
 
-def Heapify(Arr, n, i):
-    Largest = i
-    Left = 2*i + 1  # Why plus 1?
-    Right = 2*i + 2  # Why plus 2?
-
-    if (Left < n and Arr[Left] > Arr[i]):
-        Largest = Left
-
-    if (Right < n and Arr[Right] > Arr[Largest]):
-        Largest = Right
-
-    if Largest != i:
-        Arr[i], Arr[Largest] = Arr[Largest], Arr[i]
-        Heapify(Arr, n, Largest)
+def RandomizedPartition(Arr, p, r):
+    j = random.randint(p, r)
+    Arr[j], Arr[r] = Arr[r], Arr[j]
+    return Partition(Arr, p, r)
 
 
-def HeapSort(Arr):
-    n = len(Arr)
+def Partition(Arr, p, r):
+    pivot = Arr[r]
+    i = p - 1
+    for j in range(p, r):
+        if Arr[j] <= pivot:
+            i += 1
+            Arr[i], Arr[j] = Arr[j], Arr[i]
+    # Swap Elements
+    Arr[i+1], Arr[r] = Arr[r], Arr[i+1]
+    return (i+1)  # Return element q
 
-    for i in range(math.floor(n/2) - 1, -1, -1):
-        Heapify(Arr, n, i)
 
-    for i in range(n-1, 0, -1):  # Decrement from last element to second last element
-        Arr[i], Arr[0] = Arr[0], Arr[i]
-        Heapify(Arr, i, 0)
+def QuickSort(Arr, p, r):
+    if (p < r):
+        q = RandomizedPartition(Arr, p, r)
+        QuickSort(Arr, p, q - 1)
+        QuickSort(Arr, q + 1, r)
 
 
-def TimeAlgorithm(Arr, InputSize):
+def TimeAlgorithm(Arr, InputSize, p, r):
     ExecTime = []
     for i in InputSize:
         StartTime = time.time()
-        HeapSort(Arr[0:i])
+        QuickSort(Arr[0:i], p, i-1)
         ExecTime.append(time.time() - StartTime)
     return ExecTime
 
@@ -77,13 +75,22 @@ def Graph(InputSize, ExecTime):
     plt.plot(InputSize, ExecTime)
     plt.ylabel('Runtime (s)')
     plt.xlabel('Input Size (logn)')
-    plt.title('Algorithm RunTime of HEAP SORT as a Function of Input Size')
+    plt.title('Algorithm RunTime of QUICK SORT as a Function of Input Size')
     plt.show()
 
 
+p = 0
+r = len(Arr) - 1
+
 if Submission:  # Submission flag
-    print(f'Running HeapSort on Input Size of {len(Arr)}')
-    HeapSort(Arr)
+    print(f'Running QuickSort on Input Size of {len(Arr)}')
+
+    StartTime = time.time()
+
+    QuickSort(Arr, p, r)
+
+    Total = time.time() - StartTime
+
     # Print the sorted array
     for i in Arr:
         Data[i].insert(0, i)
@@ -92,9 +99,9 @@ if Submission:  # Submission flag
     SortStatus = all(Arr[i] <= Arr[i+1]
                      for i in range(len(Arr)-1))  # Check if Sorted
     print(f'Is the Dataset Sorted: {SortStatus}')
-
+    print(Total)
 else:
-    print(f'Running HeapSort on Input Size of {len(Arr)}')
+    print(f'Running QuickSort on Input Size of {len(Arr)}')
     InputSize = DetermineInputSizeList(Arr)
-    ExecTime = TimeAlgorithm(Arr, InputSize)
+    ExecTime = TimeAlgorithm(Arr, InputSize, p, r)
     Graph(InputSize, ExecTime)
