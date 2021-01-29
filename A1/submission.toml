@@ -11,6 +11,12 @@ To run the algorithm, run <sorting_algorithm> <csv_file>
 For example, to sort an input file named 'test_input.csv' using HeapSort.py, type:
 'HeapSort.py test_input'
 
+After the sorted array has been printed, there are two addition lines printed:
+1) Status of output array. If Sorted, returns True, if failed, returns False
+2) Time that algorithm took to run in seconds
+
+*** Please note that CountingSort.py takes much longer than heapsort and quicksort ***
+
 
 """
 

@@ -7,7 +7,7 @@ import sys
 import csv
 import time
 import math
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import random
 
 sys.setrecursionlimit(10**9)
@@ -84,13 +84,11 @@ r = len(Arr) - 1
 
 if Submission:  # Submission flag
     print(f'Running QuickSort on Input Size of {len(Arr)}')
-
     StartTime = time.time()
 
     QuickSort(Arr, p, r)
 
     Total = time.time() - StartTime
-
     # Print the sorted array
     for i in Arr:
         Data[i].insert(0, i)

@@ -7,7 +7,7 @@ import sys
 import csv
 import time
 import math
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 import random
 
 sys.setrecursionlimit(10**9)
@@ -77,6 +77,11 @@ if Submission:  # Submission flag
     print(
         f'Running Counting Sort on Input Size of {len(Arr)}. Please be patient for large n inputs.')
     CountingSort(Arr, max_value)
+    StartTime = time.time()
+
+    CountingSort(Arr, max_value)
+
+    Total = time.time() - StartTime
     # Print the sorted array
     for i in Arr:
         Data[i].insert(0, i)
@@ -85,6 +90,7 @@ if Submission:  # Submission flag
     SortStatus = all(Arr[i] <= Arr[i+1]
                      for i in range(len(Arr)-1))  # Check if Sorted
     print(f'Is the Dataset Sorted: {SortStatus}')
+    print(Total)
 else:
     print(f'Running Counting Sort on Input Size of {len(Arr)}')
     InputSize = DetermineInputSizeList(Arr)
