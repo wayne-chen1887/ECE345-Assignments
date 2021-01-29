@@ -1,14 +1,22 @@
-# Please provide running instructions with examples
-instructions = """
+
+instructions = 
+
+"""
+
+The CSV files to be ran must be found in the same
+directory as the sorting algorithms. 
+
+To run the algorithm, run <sorting_algorithm> <csv_file>
+
+For example, to sort an input file named 'test_input.csv' using HeapSort.py, type:
+'HeapSort.py test_input'
+
 
 """
 
 [[student]]
-name = "Student 1's name"
-utor = "Student 1's utorid"
-nmbr = "Student 1's student number"
+name = "WenChao Chen"
+utor = "chenw130"
+nmbr = "1002475083"
 
-[[student]]
-name = "Student 2's name"
-utor = "Student 2's utorid"
-nmbr = "Student 2's student number"
+

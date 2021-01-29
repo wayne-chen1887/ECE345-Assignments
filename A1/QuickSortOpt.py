@@ -1,4 +1,4 @@
-# !/usr/bin/env python3
+#!/usr/bin/env python3
 
 # QUICKSORT
 # Worst Case - Theta(n^2)
