@@ -1,0 +1,14 @@
+# Please provide running instructions with examples
+instructions = """
+
+"""
+
+[[student]]
+name = "Student 1's name"
+utor = "Student 1's utorid"
+nmbr = "Student 1's student number"
+
+[[student]]
+name = "Student 2's name"
+utor = "Student 2's utorid"
+nmbr = "Student 2's student number"
