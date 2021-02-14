@@ -173,8 +173,16 @@ if __name__ == '__main__':
 
         # Creating various hash table sizes
         n = 1000
-        stop = 100000
-        hash_size_list = list(range(n, stop, 2*n))
+        stop = 2000000
+        j = 1
+        i = 1000
+
+        hash_size_list = []
+        while i < stop:
+            hash_size_list.append(i)
+            i = 1000*(2**j)
+            j += 1
+        print(hash_size_list)
 
         # Generating 5 files with randomized alphanumeric
         file_names_list = generate_new_password_file(
