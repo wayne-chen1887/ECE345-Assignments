@@ -35,7 +35,6 @@ def findMembers(graph):
     uniqueMembers = []
     for line in open(graph, "r"):
         elements = line.split()
-
         if(elements[0] not in uniqueMembers):
             uniqueMembers.append(elements[0])
         if(elements[1] not in uniqueMembers):

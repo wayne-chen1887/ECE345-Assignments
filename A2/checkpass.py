@@ -5,9 +5,9 @@ import timeit
 import random
 import string
 
-# sys.argv[1] Make a copy of the original password text file so that the new entries aren't added on to the original.
-file = "passwords1.txt"
-password_to_check = "ece345LoVe"  # sys.argv[2]
+#Make a copy of the original password text file so that the new entries aren't added on to the original.
+file = sys.argv[1] #"passwords1.txt"
+password_to_check = sys.argv[2] #"ece345LoVe"
 hash_table_size = 500  # Set Hashtable size
 
 # The hashing approach that is being used is chaining.
@@ -159,7 +159,7 @@ def part2Combine(file_names_list, hash_size_list, file_number):
 if __name__ == '__main__':
 
     # True to execute part 1, false to execute part 2 plotting
-    submission = False
+    submission = True
 
     if submission:
 
@@ -218,3 +218,6 @@ if __name__ == '__main__':
         plt.tight_layout()
         plt.savefig('avg_collision.png')
         plt.show()
+        
+        print(collision1, '\n', collision2, '\n',
+              collision3, '\n', collision4, '\n', collision5)

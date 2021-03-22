@@ -1,0 +1,28 @@
+
+instructions = 
+
+"""
+In the directory of the python script:
+
+1. chmod +x checkpass.py 
+2. checkpass.py <txt_file.txt> <password>
+
+ensure that a .txt file is in the same directory as the python script.
+
+For example: checkpass.py password.txt password
+
+This will create a hash all elements of password.txt into a hashtable, and determine if password is valid based on the password.txt file.
+Valid will print if the password is valid and the password will be appended to password.txt
+Invalid will print if the password is invalid and the password does not meet the conditions of a valid password
+
+"""
+
+[[student 1]]		
+name = "WenChao Chen"
+utor = "chenw130"
+nmbr = "1002475083"
+
+[[student 2]]
+name = "Daniel Fan"
+utor = "fandani1"
+nmbr = "1003154061"
