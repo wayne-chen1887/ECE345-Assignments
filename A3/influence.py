@@ -5,8 +5,8 @@ import timeit
 import math
 import random
 from queue import PriorityQueue
-graph = "facebook_small.txt"  # sys.argv[1]
-T = 1  # sys.argv[2]
+graph = sys.argv[1]
+T = sys.argv[2]
 
 # Creates an adjacency list from given graph input
 # Input: string graph representing the name of the file
@@ -79,7 +79,7 @@ def spreadForEachMember(adjacencyList, uniqueMembers, T):
     for member in uniqueMembers:
         distanceSet = findShortestPaths(adjacencyList, member, uniqueMembers)
         spread = len(
-            [node for node in distanceSet.values() if float(node) <= T])
+            [node for node in distanceSet.values() if float(node) <= float(T)])
         memberSpread[member] = spread
 
     return memberSpread
