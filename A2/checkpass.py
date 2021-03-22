@@ -134,11 +134,13 @@ def plots(loading_factor, collisions, name):
 
     plt.plot(loading_factor, collisions, marker='.')
     plt.xlabel('Loading Factor (n/m)')
+    print(loading_factor)
     plt.xticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
     plt.ylabel('Number of Collisions')
     plt.title('Loading Factor vs Collisions for "{}"'.format(name))
     plt.grid()
     plt.tight_layout()
+    plt.savefig('plot-loadingfactor_v_collisions-{}.png'.format(name))
     plt.show()
 
 
@@ -195,5 +197,24 @@ if __name__ == '__main__':
         collision4 = part2Combine(file_names_list, hash_size_list, 3)
         collision5 = part2Combine(file_names_list, hash_size_list, 4)
 
-        print(collision1, '\n', collision2, '\n',
-              collision3, '\n', collision4, '\n', collision5)
+        collision_avg = []
+        for i in range(len(collision1)):
+            collision_avg.append(
+                (collision1[i] + collision2[i] + collision3[i] + collision4[i] + collision5[i])/5)
+
+        print(collision_avg)
+
+        import matplotlib.pyplot as plt
+
+        loading_factor = [1.0, 0.5, 0.25, 0.125, 0.0625, 0.03125,
+                          0.015625, 0.0078125, 0.00390625, 0.001953125, 0.0009765625]
+
+        plt.plot(loading_factor, collision_avg, marker='.')
+        plt.xlabel('Loading Factor (n/m)')
+        plt.xticks([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0])
+        plt.ylabel('Number of Collisions')
+        plt.title('Average Loading Factor vs. Number of Collisions')
+        plt.grid()
+        plt.tight_layout()
+        plt.savefig('avg_collision.png')
+        plt.show()
